@@ -23,20 +23,26 @@ public class Driver {
 
 				int last = 0;
 				int current = 0;
+				long lastTime=System.currentTimeMillis();
+				long currentTime;
 				while (true) {
 					try {
+						Thread.currentThread().sleep(1000);
+						
 						
 						for (int i = 0; i < runners.length; i++) {
 							current += runners[i].getFinishedNum();
 						}
+						currentTime=System.currentTimeMillis();
+						
 						int count=current-last;
 						if(count!=0){
-							LOG.info("count: "+count+"; avg latency: "+(1000/count));
+							LOG.info("count: "+count+"; avg latency: "+((currentTime-lastTime)/count));
 						}else{
 							LOG.info("count: "+count+"; avg latency: -1");
 						}
 						
-						Thread.currentThread().sleep(1000);
+						lastTime=currentTime;
 						last=current;
 					} catch (Exception e) {
 						LOG.error(e.getMessage());
