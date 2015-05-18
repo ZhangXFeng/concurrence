@@ -1,6 +1,7 @@
 package io.transwarp.concurrence;
 
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.Date;
 
@@ -18,7 +19,9 @@ public class SqlRunner extends Thread {
 				
 				String sql = SqlPool.getSql();
 				Statement stmt = conn.createStatement();
-				stmt.execute(sql);
+				
+				ResultSet rs=stmt.executeQuery(sql);
+				rs.next();
 				finished++;
 //				LOG.info("endtime: "+new Date()+" ;finished: "+finished);
 			} catch (Exception e) {

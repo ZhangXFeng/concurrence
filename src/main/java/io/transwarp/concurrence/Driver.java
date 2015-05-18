@@ -44,6 +44,7 @@ public class Driver {
 						
 						lastTime=currentTime;
 						last=current;
+						current=0;
 					} catch (Exception e) {
 						LOG.error(e.getMessage());
 					}
